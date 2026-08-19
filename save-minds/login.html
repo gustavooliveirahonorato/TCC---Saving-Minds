@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#56c287" />
+    <meta
+      name="description"
+      content="Mente Acadêmica — acesse a plataforma de saúde mental. Cuide de quem carrega tudo."
+    />
+    <title>Mente Acadêmica — Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="brand-panel" aria-label="Apresentação Mente Acadêmica">
+        <span class="brand-blob brand-blob--top-right" aria-hidden="true"></span>
+        <span class="brand-blob brand-blob--bottom-left" aria-hidden="true"></span>
+
+        <div class="brand-card">
+          <span class="brand-blob brand-blob--card-tr" aria-hidden="true"></span>
+          <span class="brand-blob brand-blob--card-bl" aria-hidden="true"></span>
+
+          <span class="badge">Saúde Mental</span>
+
+          <h1 class="brand-headline">Cuide de quem<br />carrega tudo.</h1>
+
+          <p class="brand-support">
+            Porque cuidar de você também é um ato de força.
+          </p>
+
+          <div class="brand-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+
+          <div class="brand-logo">
+            <span class="brand-logo__name">Mente Acadêmica</span>
+            <span class="brand-logo__url">menteacademica.com.br</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="login-panel" aria-label="Acesso à plataforma">
+        <header class="mobile-header" aria-hidden="true">
+          <span class="mh-blob mh-blob--a"></span>
+          <span class="mh-blob mh-blob--b"></span>
+          <div class="mh-avatar">MA</div>
+          <p class="mh-name">Mente Acadêmica</p>
+          <p class="mh-tagline">Cuide da sua mente conosco</p>
+        </header>
+
+        <div class="login-wrap">
+          <div class="login-intro">
+            <h2 class="login-title">Bem-vindo de volta!</h2>
+            <p class="login-subtitle">
+              Insira suas credenciais para acessar a plataforma.
+            </p>
+          </div>
+
+          <div class="login-card">
+            <form id="login-form" class="login-form" novalidate>
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  placeholder="seuemail@exemplo.com"
+                  aria-describedby="email-error"
+                />
+                <span class="error-msg" id="email-error" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="password">Senha</label>
+                <div class="password-wrap">
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="current-password"
+                    placeholder="••••••••••"
+                    aria-describedby="password-error"
+                  />
+                  <button
+                    type="button"
+                    class="toggle-password"
+                    id="toggle-password"
+                    aria-label="Mostrar senha"
+                    aria-pressed="false"
+                  >
+                    <svg class="icon-eye" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="12" cy  ="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+                    </svg>
+                    
+                    <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                      <path d="M10.6 5.2A10.9 10.9 0 0 1 12 5c6.5 0 10 7 10 7a18.4 18.4 0 0 1-3 3.9M6.6 6.6A18.4 18.4 0 0 0 2 12s3.5 7 10 7a10.8 10.8 0 0 0 4-.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+                <span class="error-msg" id="password-error" role="alert"></span>
+              </div>
+
+              <div class="form-row">
+                <label class="checkbox">
+                  <input type="checkbox" id="remember" name="remember" />
+                  <span class="checkbox__box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M5 12.5l4 4 10-10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="checkbox__label">Lembrar senha</span>
+                </label>
+                <a href="#" class="link-reset">Redefinir senha</a>
+              </div>
+
+              <button type="submit" class="btn-submit" id="btn-submit">
+                <span class="btn-label">Entrar</span>
+                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="spinner" aria-hidden="true"></span>
+              </button>
+
+              <p class="signup">
+                Não tem uma conta?
+                <a href="#" class="link-signup">Cadastre-se grátis</a>
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <footer class="login-footer">© 2025 Mente Acadêmica</footer>
+      </section>
+    </main>
+
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

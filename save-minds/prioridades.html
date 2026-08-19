@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving Minds | Organizador de Prioridades</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .prioridade-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 650px;
+            margin: 20px auto 0 auto;
+        }
+        .form-tarefa {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .form-tarefa input, .form-tarefa select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+        .form-tarefa input {
+            flex: 1;
+        }
+        .btn-add {
+            background-color: #8C78B3;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-add:hover {
+            background-color: #726095;
+        }
+        .colunas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .coluna {
+            background-color: #F8F6E8;
+            padding: 15px;
+            border-radius: 10px;
+            min-height: 200px;
+        }
+        .coluna h4 {
+            color: #4A3E65;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .item-tarefa {
+            background: #ffffff;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+        .acoes-tarefa {
+            display: flex;
+            gap: 6px;
+        }
+        .btn-acao {
+            background: #eee;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .btn-acao:hover {
+            background: #ddd;
+        }
+        .btn-del {
+            background: none;
+            border: none;
+            color: #cc0000;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-menu">
+            <img class="imgLampadaMenu" src="img/logo.png" alt="Logo Saving Minds">
+            <h2>SAVING<br>MINDS</h2>
+        </div>
+        <nav class="menu">
+            <a href="index.html">Início</a>
+            <a href="diario.html"> Diário</a>
+            <a href="quiz.html">Quiz de Humor</a>
+            <a href="respiracao.html"> Exercícios de Respiração</a>
+            <a href="chat/chat.html"> Chat</a>
+            <a href="prioridades.html" class="active">Organizar Mente</a>
+            <a href="autocuidado.html"> Autocuidado Docente</a>
+            <a href="ajuda.html"> Ajuda Imediata</a>
+        </nav>
+    </aside>
+
+    <div class="site-wrapper">
+        <main>
+            <section class="inicio">
+                <div class="inicio-texto">
+                    <h1>Descarregue sua Mente!</h1>
+                    <p>Sente que tem coisas demais para fazer? Escreva tudo aqui para organizar seus pensamentos e focar em um passo de cada vez.</p>
+                </div>
+            </section>
+
+            <div class="prioridade-container">
+                <div class="form-tarefa">
+                    <input type="text" id="inputTarefa" placeholder="O que está preocupando você agora?" autocomplete="off">
+                    <select id="selectPrioridade">
+                        <option value="urgente">Fazer Hoje (Urgente)</option>
+                        <option value="depois">Fazer Depois</option>
+                    </select>
+                    <button class="btn-add" onclick="adicionarTarefa()">Adicionar</button>
+                </div>
+
+                <div class="colunas-grid">
+                    <div class="coluna">
+                        <h4>🔥 Fazer Hoje (Urgente)</h4>
+                        <div id="listaUrgente"></div>
+                    </div>
+                    <div class="coluna">
+                        <h4>⏳ Fazer Depois</h4>
+                        <div id="listaDepois"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Carrega as tarefas salvas assim que a página abre
+        document.addEventListener('DOMContentLoaded', carregarTarefas);
+
+        function obterTarefas() {
+            const dados = localStorage.getItem('saving_minds_prioridades');
+            return dados ? JSON.parse(dados) : [];
+        }
+
+        function salvarTarefas(tarefas) {
+            localStorage.setItem('saving_minds_prioridades', JSON.stringify(tarefas));
+        }
+
+        function adicionarTarefa() {
+            const input = document.getElementById('inputTarefa');
+            const select = document.getElementById('selectPrioridade');
+            const texto = input.value.trim();
+
+            if (!texto) return;
+
+            const novasTarefas = obterTarefas();
+            novasTarefas.push({
+                id: Date.now(),
+                texto: texto,
+                tipo: select.value // 'urgente' ou 'depois'
+            });
+
+            salvarTarefas(novasTarefas);
+            input.value = '';
+            carregarTarefas();
+        }
+
+        function carregarTarefas() {
+            const listaUrgente = document.getElementById('listaUrgente');
+            const listaDepois = document.getElementById('listaDepois');
+
+            listaUrgente.innerHTML = '';
+            listaDepois.innerHTML = '';
+
+            const tarefas = obterTarefas();
+
+            tarefas.forEach(tarefa => {
+                const item = document.createElement('div');
+                item.className = 'item-tarefa';
+                
+                // Botões de ação dependendo de onde a tarefa está
+                let botaoMudar = '';
+                if (tarefa.tipo === 'urgente') {
+                    botaoMudar = `<button class="btn-acao" onclick="mudarTipo(${tarefa.id}, 'depois')" title="Mover para Fazer Depois">⬇️</button>`;
+                } else {
+                    botaoMudar = `<button class="btn-acao" onclick="mudarTipo(${tarefa.id}, 'urgente')" title="Mover para Fazer Hoje">⬆️</button>`;
+                }
+
+                item.innerHTML = `
+                    <span>${tarefa.texto}</span>
+                    <div class="acoes-tarefa">
+                        ${botaoMudar}
+                        <button class="btn-del" onclick="removerTarefa(${tarefa.id})" title="Concluir/Excluir">✓</button>
+                    </div>
+                `;
+
+                if (tarefa.tipo === 'urgente') {
+                    listaUrgente.appendChild(item);
+                } else {
+                    listaDepois.appendChild(item);
+                }
+            });
+        }
+
+        function mudarTipo(id, novoTipo) {
+            let tarefas = obterTarefas();
+            tarefas = tarefas.map(t => {
+                if (t.id === id) t.tipo = novoTipo;
+                return t;
+            });
+            salvarTarefas(tarefas);
+            carregarTarefas();
+        }
+
+        function removerTarefa(id) {
+            let tarefas = obterTarefas();
+            tarefas = tarefas.filter(t => t.id !== id);
+            salvarTarefas(tarefas);
+            carregarTarefas();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving Minds | Quiz de Humor Completo</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Card Explicativo de Apresentação */
+        .intro-quiz-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            max-width: 750px;
+            margin: 20px auto 25px auto;
+            border: 1px solid #E0E0E0;
+            border-left: 6px solid #8C78B3;
+        }
+
+        .intro-quiz-card h2 {
+            color: #4A3E65;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .intro-quiz-card p {
+            color: #555555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .info-pills-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .info-pill {
+            background-color: #F8F6E8;
+            color: #4A3E65;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #E0E0E0;
+        }
+
+        /* Container Principal do Quiz */
+        .quiz-container {
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            max-width: 750px;
+            margin: 0 auto;
+            border: 1px solid #E0E0E0;
+        }
+
+        /* Barra de Progresso Visual */
+        .barra-progresso-container {
+            width: 100%;
+            height: 10px;
+            background-color: #F8F6E8;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .barra-progresso-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8C78B3, #4FB3BF);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-progresso-texto {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #8C78B3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .quiz-pergunta {
+            font-size: 1.25rem;
+            color: #4A3E65;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-weight: bold;
+        }
+
+        .quiz-subtexto {
+            font-size: 0.9rem;
+            color: #666666;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quiz-opcao-btn {
+            background-color: #F8F6E8;
+            border: 2px solid #E0E0E0;
+            color: #4A3E65;
+            padding: 16px 20px;
+            border-radius: 12px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .quiz-opcao-btn:hover {
+            background-color: #8C78B3;
+            color: #ffffff;
+            border-color: #8C78B3;
+            transform: translateY(-2px);
+        }
+
+        .quiz-opcao-btn:hover .opcao-detalhe {
+            color: #E8E3F3;
+        }
+
+        .opcao-titulo {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .opcao-detalhe {
+            font-size: 0.85rem;
+            color: #666666;
+        }
+
+        /* Tela de Resultado Explicativo */
+        .quiz-resultado {
+            display: none;
+            text-align: left;
+        }
+
+        .quiz-resultado h2 {
+            color: #4A3E65;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .card-diagnostico {
+            background-color: #F8F6E8;
+            border-left: 6px solid #8C78B3;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-diagnostico h3 {
+            color: #2D2B55;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .card-diagnostico p {
+            color: #4A3E65;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .recomendacoes-lista {
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .recomendacoes-lista h4 {
+            color: #4A3E65;
+            margin-bottom: 10px;
+        }
+
+        .recomendacoes-lista ul {
+            margin-left: 20px;
+            color: #555555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .btn-reiniciar {
+            background-color: #8C78B3;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-reiniciar:hover {
+            background-color: #726095;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo-menu">
+            <img class="imgLampadaMenu" src="img/logo.png" alt="Logo Saving Minds">
+            <h2>SAVING<br>MINDS</h2>
+        </div>
+
+        <nav class="menu">
+            <a href="index.html">Início</a>
+            <a href="diario.html">Mensagens</a>
+            <a href="quiz.html" class="active">Quiz de Humor</a>
+            <a href="respiracao.html"> Exercícios de Respiração</a>
+            <a href="chat/chat.html">Chat</a>
+            <a href="foco.html">Foco Consciente</a>
+            <a href="autocuidado.html">Autocuidado Docente</a>
+            <a href="ajuda.html">Ajuda Imediata</a>
+        </nav>
+    </aside>
+
+    <div class="site-wrapper">
+        <main>
+            <section class="inicio">
+                <div class="inicio-texto">
+                    <h1>Mapeamento Emocional Completo!</h1>
+                    <p>Avaliação detalhada para analisar sua energia, foco, estresse e rotina de descanso.</p>
+                </div>
+            </section>
+
+            <!-- Bloco Explicativo de Abertura -->
+            <div class="intro-quiz-card">
+                <h2>📊 Como funciona o Check-in Emocional?</h2>
+                <p>
+                    O objetivo deste quiz é ajudar você a identificar sinais sutis de desgaste emocional ou estresse acumulado na rotina de estudos e trabalho. 
+                    Responda com honestidade e sem julgamentos — não existem respostas "certas" ou "erradas", apenas o seu momento presente.
+                </p>
+                <div class="info-pills-container">
+                    <span class="info-pill"> Duração: ~3 minutos</span>
+                    <span class="info-pill">15 Perguntas curtas</span>
+                    <span class="info-pill"> Respostas 100% anônimas</span>
+                </div>
+            </div>
+
+            <!-- Quiz de Perguntas -->
+            <div class="quiz-container">
+                <div id="blocoQuiz">
+                    <div class="barra-progresso-container">
+                        <div class="barra-progresso-fill" id="barraProgresso"></div>
+                    </div>
+                    <div class="quiz-progresso-texto" id="quizProgresso">PERGUNTA 1 DE 15</div>
+                    <div class="quiz-pergunta" id="quizPergunta">Carregando pergunta...</div>
+                    <div class="quiz-subtexto" id="quizSubtexto">Selecione a opção que melhor reflete seu momento atual:</div>
+                    
+                    <div class="quiz-opcoes" id="quizOpcoes">
+                        <!-- Opções geradas via JS -->
+                    </div>
+                </div>
+
+                <!-- Resultado Explicativo -->
+                <div class="quiz-resultado" id="blocoResultado">
+                    <h2 id="tituloResultado">Análise do seu Check-in Emocional</h2>
+                    
+                    <div class="card-diagnostico">
+                        <h3 id="subtituloResultado">Diagnóstico Geral</h3>
+                        <p id="textoResultado">Carregando análise explicativa...</p>
+                    </div>
+
+                    <div class="recomendacoes-lista">
+                        <h4>💡 Recomendações de Ação no Saving Minds:</h4>
+                        <ul id="listaRecomendacoes">
+                            <!-- Recomendações preenchidas via JS -->
+                        </ul>
+                    </div>
+
+                    <button class="btn-reiniciar" onclick="reiniciarQuiz()">Refazer Mapeamento</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const perguntas = [
+            {
+                pergunta: "1. Como está seu nível de energia ao acordar ultimamente?",
+                subtexto: "Análise da qualidade da sua recuperação diária.",
+                opcoes: [
+                    { titulo: "⚡ Disposto(a) e com energia", detalhe: "Acordo sem dificuldades e pronto para o dia.", pontos: 3 },
+                    { titulo: "🙂 Moderado", detalhe: "Levo um tempo para engrenar, mas consigo realizar a rotina.", pontos: 2 },
+                    { titulo: "😫 Exausto(a) e sem força", detalhe: "Sinto um cansaço pesado logo nos primeiros minutos do dia.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "2. Como anda a sua capacidade de concentração nas atividades diárias?",
+                subtexto: "Análise de foco e fadiga mental.",
+                opcoes: [
+                    { titulo: "🎯 Foco total", detalhe: "Consigo concluir minhas tarefas sem muitas distrações.", pontos: 3 },
+                    { titulo: "📱 Dispersão constante", detalhe: "Me distraio com facilidade e preciso fazer esforço para voltar.", pontos: 2 },
+                    { titulo: "🤯 Mente nublada", detalhe: "Sinto muita dificuldade em entender ou guardar conteúdos.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "3. Qual tem sido a qualidade das suas noites de sono?",
+                subtexto: "Avaliação da restauração neurofisiológica.",
+                opcoes: [
+                    { titulo: "😴 Sono profundo e reparador", detalhe: "Dormir bem é uma regra e me sinto descansado(a).", pontos: 3 },
+                    { titulo: "🛌 Sono interrompido", detalhe: "Acordo algumas vezes durante a noite ou demoro para pegar no sono.", pontos: 2 },
+                    { titulo: "🌙 Insônia ou sono muito leve", detalhe: "Tenho tido noites agitadas e pouquíssimo descanso.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "4. Como você reage quando surgem imprevistos na sua rotina?",
+                subtexto: "Mede o nível de flexibilidade emocional.",
+                opcoes: [
+                    { titulo: "🧘 Calmo(a) e adaptável", detalhe: "Busco alternativas sem me desesperar.", pontos: 3 },
+                    { titulo: "😟 Fico incomodado(a)", detalhe: "Perco o ritmo, mas com o tempo me reorganizo.", pontos: 2 },
+                    { titulo: "💥 Extremamente estressado(a)", detalhe: "Tenho vontade de desistir ou fico muito irritado(a).", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "5. Você consegue ter momentos diários de lazer ou pausa deliberada?",
+                subtexto: "Mede a presença de hábitos de descompressão.",
+                opcoes: [
+                    { titulo: "✨ Sim, priorizo pausas", detalhe: "Consigo desconectar e fazer algo por prazer.", pontos: 3 },
+                    { titulo: "⏳ Pouco tempo", detalhe: "Faço pausas curtas, mas sempre pensando nas obrigações.", pontos: 2 },
+                    { titulo: "🚫 Zero momentos livres", detalhe: "Minha rotina é 100% voltada ao trabalho ou obrigações.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "6. Como está a sua paciência ao conviver com pessoas próximas ou colegas?",
+                subtexto: "Avaliação do impacto do estresse no convívio interpessoal.",
+                opcoes: [
+                    { titulo: "😊 Tolerante e acolhedor(a)", detalhe: "Consigo praticar boa empatia e escuta.", pontos: 3 },
+                    { titulo: "😐 Impaciente ocasionalmente", detalhe: "Algumas conversas longas acabam me irritando.", pontos: 2 },
+                    { titulo: "🗯️ Reativo(a) ou isolado(a)", detalhe: "Prefiro evitar conversas pois me irritam rápido.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "7. Com qual frequência você sente sintomas físicos associados ao estresse?",
+                subtexto: "(Dores de cabeça, tensão no pescoço, incômodos no estômago).",
+                opcoes: [
+                    { titulo: "🟢 Raramente ou nunca", detalhe: "Sinto meu corpo leve e sem tensões.", pontos: 3 },
+                    { titulo: "🟡 Às vezes na semana", detalhe: "Aparecem dores nos dias de maior cobrança.", pontos: 2 },
+                    { titulo: "🔴 Frequência diária", detalhe: "A tensão muscular e o incômodo são constantes.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "8. Qual é a sua sensação em relação às pendências dos próximos dias?",
+                subtexto: "Mede o grau de ansiedade antecipatória.",
+                opcoes: [
+                    { titulo: "📋 Controle seguro", detalhe: "Sei o que preciso fazer e planejo sem surtos.", pontos: 3 },
+                    { titulo: "😰 Um pouco receoso(a)", detalhe: "Fico apreensivo(a), mas sigo em frente.", pontos: 2 },
+                    { titulo: "🌪️ Desesperador", detalhe: "Sinto que vou me afogar na quantidade de tarefas.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "9. Como você avalia a sua alimentação e hidratação na rotina atual?",
+                subtexto: "Mede a manutenção dos cuidados básicos corporais.",
+                opcoes: [
+                    { titulo: "🥗 Equilibrada e com calma", detalhe: "Bebo água e faço refeições em horários adequados.", pontos: 3 },
+                    { titulo: "🥪 Na correria", detalhe: "Como rápido demais e às vezes esqueço de beber água.", pontos: 2 },
+                    { titulo: "❌ Desregulada", detalhe: "Pulo refeições ou busco apenas ultraprocessados por ansiedade.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "10. Qual é a frequência com que você consegue 'desconectar' das telas?",
+                subtexto: "Mede a exposição contínua a estímulos visuais e mentais.",
+                opcoes: [
+                    { titulo: "🌳 Desconecto com facilidade", detalhe: "Passo momentos sem celular ou computador sem ansiedade.", pontos: 3 },
+                    { titulo: "📲 Apenas na hora de dormir", detalhe: "Checo notificações direto durante o dia.", pontos: 2 },
+                    { titulo: "💻 100% conectado(a)", detalhe: "Não consigo largar o celular mesmo quando estou exausto(a).", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "11. Como você se sente ao pensar nas suas conquistas recentes?",
+                subtexto: "Avaliação do sentimento de realização pessoal.",
+                opcoes: [
+                    { titulo: "🎉 Orgulhoso(a) e satisfeito(a)", detalhe: "Reconheço o meu esforço diário.", pontos: 3 },
+                    { titulo: "🤷 Sensação neutra", detalhe: "Acho que só fiz a minha obrigação.", pontos: 2 },
+                    { titulo: "😞 Sensação de insuficiência", detalhe: "Sinto que nunca faço o bastante, mesmo cansado(a).", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "12. Como você avalia seu nível de motivação para começar novos projetos?",
+                subtexto: "Análise do nível de engajamento emocional.",
+                opcoes: [
+                    { titulo: "🚀 Animado(a) e curioso(a)", detalhe: "Gosto de aprender e encarar novidades.", pontos: 3 },
+                    { titulo: "🚶 Apenas cumprindo o esperado", detalhe: "Faço o que precisa ser feito sem grande entusiasmo.", pontos: 2 },
+                    { titulo: "🪨 Sem energia para nada", detalhe: "Pensar em qualquer novidade me traz exaustão.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "13. Como você cuida da sua postura e respiração durante o trabalho ou estudo?",
+                subtexto: "Mede a consciência corporal contínua.",
+                opcoes: [
+                    { titulo: "🧘 Consciente", detalhe: "Faço pausas para me alongar e respiro fundo.", pontos: 3 },
+                    { titulo: "🪑 Lembro raramente", detalhe: "Só percebo quando já estou com dores na coluna.", pontos: 2 },
+                    { titulo: "🔒 Totalmente travado(a)", detalhe: "Respiro de forma curta e permaneço tenso(a) horas seguidas.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "14. Você sente que tem alguém de confiança para desabafar quando necessário?",
+                subtexto: "Avaliação da rede de suporte social.",
+                opcoes: [
+                    { titulo: "🤝 Sim, tenho um bom suporte", detalhe: "Sei com quem conversar e me sinto acolhido(a).", pontos: 3 },
+                    { titulo: "😶 Poucas pessoas", detalhe: "Desabafo de vez em quando, mas guardo muito para mim.", pontos: 2 },
+                    { titulo: "🔕 Me sinto completamente só", detalhe: "Não tenho com quem dividir meu cansaço.", pontos: 1 }
+                ]
+            },
+            {
+                pergunta: "15. De forma geral, como você resume seu estado mental hoje?",
+                subtexto: "Síntese intuitiva do seu momento.",
+                opcoes: [
+                    { titulo: "☀️ Em equilíbrio", detalhe: "Conseguindo navegar bem pelos altos e baixos.", pontos: 3 },
+                    { titulo: "⛅ Na corda bamba", detalhe: "Preciso de um pouco de descanso antes que fique pesado.", pontos: 2 },
+                    { titulo: "🌧️ No meu limite", detalhe: "Preciso desacelerar urgentemente.", pontos: 1 }
+                ]
+            }
+        ];
+
+        let perguntaAtual = 0;
+        let pontuacaoTotal = 0;
+
+        function carregarPergunta() {
+            const p = perguntas[perguntaAtual];
+            const percentual = ((perguntaAtual + 1) / perguntas.length) * 100;
+
+            document.getElementById('barraProgresso').style.width = `${percentual}%`;
+            document.getElementById('quizProgresso').innerText = `PERGUNTA ${perguntaAtual + 1} DE ${perguntas.length}`;
+            document.getElementById('quizPergunta').innerText = p.pergunta;
+            document.getElementById('quizSubtexto').innerText = p.subtexto;
+
+            const conteinerOpcoes = document.getElementById('quizOpcoes');
+            conteinerOpcoes.innerHTML = '';
+
+            p.opcoes.forEach(opcao => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opcao-btn';
+                btn.innerHTML = `<span class="opcao-titulo">${opcao.titulo}</span><span class="opcao-detalhe">${opcao.detalhe}</span>`;
+                btn.onclick = () => responder(opcao.pontos);
+                conteinerOpcoes.appendChild(btn);
+            });
+        }
+
+        function responder(pontos) {
+            pontuacaoTotal += pontos;
+            perguntaAtual++;
+
+            if (perguntaAtual < perguntas.length) {
+                carregarPergunta();
+            } else {
+                exibirResultado();
+            }
+        }
+
+        function exibirResultado() {
+            document.getElementById('blocoQuiz').style.display = 'none';
+            const blocoResultado = document.getElementById('blocoResultado');
+            const subtitulo = document.getElementById('subtituloResultado');
+            const texto = document.getElementById('textoResultado');
+            const lista = document.getElementById('listaRecomendacoes');
+
+            blocoResultado.style.display = 'block';
+
+            if (pontuacaoTotal >= 36) {
+                subtitulo.innerText = "🌟 Estado Emocional: Equilibrado e Resiliente";
+                texto.innerText = "Suas respostas indicam que você está conseguindo gerar um ótimo equilíbrio entre obrigações, cuidados corporais e momentos de descanso. Sua capacidade de gerenciar o estresse e proteger seu sono está ajudando a manter uma mente saudável.";
+                lista.innerHTML = `
+                    <li><strong>Foco Consciente:</strong> Use o Pomodoro na nossa aba de Foco para manter a produtividade sem perder o ritmo.</li>
+                    <li><strong>Mensagens:</strong> Deixe um depoimento no Mural de Mensagens para incentivar colegas que estejam passando por momentos difíceis.</li>
+                `;
+            } else if (pontuacaoTotal >= 24) {
+                subtitulo.innerText = "⛅ Estado Emocional: Atenção e Sobrecarga Moderada";
+                texto.innerText = "Você está conseguindo cumprir suas responsabilidades, mas apresenta sinais claros de desgaste físico e ansiedade. Seus níveis de descanso podem estar ficando em segundo plano, o que exige ajustes preventivos antes de gerar exaustão profunda.";
+                lista.innerHTML = `
+                    <li><strong>Exercícios de Respiração:</strong> Faça uma pausa agora e pratique 5 minutos da Respiração 4-7-8 na nossa aba 'Respire'.</li>
+                    <li><strong>Autocuidado Docente / Aluno:</strong> Verifique nosso checklist de limites para evitar levar o estresse do trabalho/estudos para casa.</li>
+                    <li><strong>Chat Inteligente:</strong> Tire dúvidas ou peça sugestões de descompressão rápida.</li>
+                `;
+            } else {
+                subtitulo.innerText = "🌧️ Estado Emocional: Alto Nível de Estresse e Exaustão";
+                texto.innerText = "Suas respostas indicam um estado avançado de cansaço mental e físico, com forte sobrecarga na rotina. É essencial reconhecer que você atingiu um limite e que sua saúde mental precisa ser prioridade no momento. Não tente carregar tudo sozinho(a).";
+                lista.innerHTML = `
+                    <li><strong>Pausa Imediata:</strong> Utilize a aba 'Respire' para desacelerar seu ritmo cardíaco.</li>
+                    <li><strong>Mural de Apoio e Chat:</strong> Use nosso Chat de Acolhimento ou converse com uma pessoa de confiança ou profissional.</li>
+                    <li><strong>Canal de Ajuda:</strong> Se estiver se sentindo muito sobrecarregado(a), acesse a aba 'Ajuda Imediata' ou ligue para o CVV (188).</li>
+                `;
+            }
+        }
+
+        function reiniciarQuiz() {
+            perguntaAtual = 0;
+            pontuacaoTotal = 0;
+            document.getElementById('blocoResultado').style.display = 'none';
+            document.getElementById('blocoQuiz').style.display = 'block';
+            carregarPergunta();
+        }
+
+        // Inicia o quiz
+        carregarPergunta();
+    </script>
+</body>
+
+</html>

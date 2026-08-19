@@ -1,0 +1,117 @@
+.foco-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-width: 500px;
+    margin: 20px auto 0 auto;
+    text-align: center;
+}
+
+.timer-circulo {
+    width: 180px;
+    height: 180px;
+    border: 6px solid var(--primary-color, #8C78B3);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px auto;
+}
+
+.timer-circulo h1 {
+    font-size: 2.5rem;
+    color: var(--text-color, #4A3E65);
+    margin: 0;
+}
+
+.timer-circulo span {
+    font-size: 0.8rem;
+    color: var(--text-muted, #666);
+}
+
+.timer-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.btn-acao-timer {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-iniciar {
+    background-color: var(--primary-color, #8C78B3);
+    color: white;
+}
+
+.btn-reiniciar {
+    background-color: #eee;
+    color: #555;
+}
+
+.secao-tarefas-bloco {
+    text-align: left;
+    border-top: 1px solid var(--border-color, #E0E0E0);
+    padding-top: 20px;
+}
+
+.secao-tarefas-bloco h4 {
+    font-size: 0.9rem;
+    color: var(--text-color, #4A3E65);
+    margin-bottom: 10px;
+}
+
+.form-bloco {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.form-bloco input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color, #E0E0E0);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-add-mini {
+    background-color: var(--primary-color, #8C78B3);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.lista-bloco-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.item-bloco-tarefa {
+    background: #F8F6E8;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-del-mini {
+    background: none;
+    border: none;
+    color: #cc0000;
+    cursor: pointer;
+    font-weight: bold;
+}

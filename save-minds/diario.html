@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving Minds | Mensagens de Apoio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .mensagens-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 20px auto 0 auto;
+        }
+
+        .filtros-categorias {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        .btn-filtro {
+            background-color: #F8F6E8;
+            border: 2px solid #E0E0E0;
+            color: #4A3E65;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-filtro:hover,
+        .btn-filtro.ativo {
+            background-color: #8C78B3;
+            color: white;
+            border-color: #8C78B3;
+        }
+
+        .mural-mensagens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .card-mensagem {
+            background-color: #F8F6E8;
+            border-left: 5px solid #8C78B3;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-mensagem p {
+            color: #4A3E65;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .card-mensagem span {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .secao-enviar {
+            border-top: 1px dashed #ccc;
+            padding-top: 25px;
+        }
+
+        .form-depoimento {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .form-depoimento textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .btn-enviar-msg {
+            background-color: #8C78B3;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .btn-enviar-msg:hover {
+            background-color: #726095;
+        }
+
+        .aviso-sucesso {
+            display: none;
+            background-color: #E2E8D8;
+            color: #2E5A27;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo-menu">
+            <img class="imgLampadaMenu" src="img/logo.png" alt="Logo Saving Minds">
+            <h2>SAVING<br>MINDS</h2>
+        </div>
+
+        <nav class="menu">
+            <a href="index.html">Início</a>
+            <a href="diario.html" class="active">Mensagens</a>
+            <a href="quiz.html">Quiz de Humor</a>
+            <a href="respiracao.html">Exercícios de Respiração</a>
+            <a href="chat/chat.html">Chat</a>
+            <a href="foco.html">Foco Consciente</a>
+            <a href="autocuidado.html">Autocuidado Docente</a>
+            <a href="ajuda.html">Ajuda Imediata</a>
+        </nav>
+    </aside>
+
+    <div class="site-wrapper">
+        <main>
+            <section class="inicio">
+                <div class="inicio-texto">
+                    <h1>Mural de Mensagens e Acolhimento!</h1>
+                    <p>Leia palavras de incentivo, depoimentos inspiradores e compartilhe mensagens positivas com a comunidade escolar.</p>
+                </div>
+            </section>
+
+            <div class="mensagens-container">
+                <h3>Explore por categoria:</h3>
+                <div class="filtros-categorias">
+                    <button class="btn-filtro ativo" onclick="filtrarMensagens('todas', this)">Todas</button>
+                    <button class="btn-filtro" onclick="filtrarMensagens('estudos', this)">Estudos & Foco</button>
+                    <button class="btn-filtro" onclick="filtrarMensagens('dificeis', this)">Dias Difíceis</button>
+                    <button class="btn-filtro" onclick="filtrarMensagens('autoestima', this)">Autoestima</button>
+                </div>
+
+                <div class="mural-mensagens" id="muralMensagens">
+                    <!-- Cards carregados via JS -->
+                </div>
+
+                <div class="secao-enviar">
+                    <h3>Deixe uma Mensagem de Apoio!</h3>
+                    <p style="font-size: 0.9rem; color: #666;">Escreva uma frase ou depoimento inspirador para ajudar outros colegas que possam estar passando por um momento difícil.</p>
+                    
+                    <form class="form-depoimento" onsubmit="salvarDiario(event)">
+                        <textarea id="conteudo_diario" placeholder="Escreva sua mensagem com carinho e respeito..." required></textarea>
+                        <button type="submit" class="btn-enviar-msg">Enviar Mensagem Anônima</button>
+                    </form>
+
+                    <div id="avisoSucesso" class="aviso-sucesso">
+                        ✓ Sua mensagem foi enviada com sucesso e adicionada ao mural!
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="diario.js"></script>
+    
+</body>
+
+</html>

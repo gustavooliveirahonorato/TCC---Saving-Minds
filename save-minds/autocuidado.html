@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving Minds | Autocuidado Docente</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .autocuidado-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 850px;
+            margin: 30px auto 0 auto;
+        }
+
+        .docente-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E0E0E0;
+        }
+
+        .docente-card h3 {
+            color: #4A3E65;
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .docente-card p {
+            color: #555555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .docente-card ul {
+            margin-left: 20px;
+            color: #4A3E65;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .docente-card ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Checklist com fundo destacado */
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #F8F6E8;
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .check-item:hover {
+            background-color: #f1edd8;
+        }
+
+        .check-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #8C78B3;
+            cursor: pointer;
+        }
+
+        .check-item label {
+            font-size: 0.95rem;
+            color: #4A3E65;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Dicas em caixas coloridas */
+        .dica-box {
+            background-color: #F8F6E8;
+            border-left: 5px solid #8C78B3;
+            padding: 15px 18px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #4A3E65;
+            line-height: 1.5;
+        }
+
+        .dica-box strong {
+            color: #2D2B55;
+        }
+
+        /* Grade de rotina rápida */
+        .rotina-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .rotina-card {
+            background-color: #FAF8F5;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .rotina-card h4 {
+            color: #8C78B3;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .rotina-card p {
+            font-size: 0.88rem;
+            margin-bottom: 0;
+        }
+
+        /* Alerta de Contato de Apoio */
+        .contato-urgente {
+            background-color: #FFF3F3;
+            border-left: 5px solid #E57373;
+            padding: 18px;
+            border-radius: 8px;
+            color: #721C24;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo-menu">
+            <img class="imgLampadaMenu" src="img/logo.png" alt="Logo Saving Minds">
+            <h2>SAVING<br>MINDS</h2>
+        </div>
+
+        <nav class="menu">
+            <a href="index.html">Início</a>
+            <a href="diario.html"> Mensagens</a>
+            <a href="quiz.html"> Quiz de Humor</a>
+            <a href="respiracao.html"> Exercícios de Respiração</a>
+            <a href="chat/chat.html"> Chat</a>
+            <a href="foco.html"> Foco Consciente</a>
+            <a href="autocuidado.html" class="active"> Autocuidado Docente</a>
+            <a href="ajuda.html"> Ajuda Imediata</a>
+        </nav>
+    </aside>
+
+    <div class="site-wrapper">
+        <main>
+            <section class="inicio">
+                <div class="inicio-texto">
+                    <h1>Espaço de Autocuidado Docente!</h1>
+                    <p>Ferramentas, orientações e estratégias de apoio dedicadas à saúde mental de educadores e gestores escolares.</p>
+                </div>
+            </section>
+
+            <div class="autocuidado-container">
+                <!-- Card 1: Sinais de Alerta -->
+                <div class="docente-card">
+                    <h3>Sinais de Alerta: Exaustão e Burnout</h3>
+                    <p>A rotina de preparação de aulas, correções e gestão de sala pode sobrecarregar a mente. Fique atento a estes sinais:</p>
+                    <ul>
+                        <li>Cansaço físico e mental persistente, mesmo após noites de sono.</li>
+                        <li>Sensação de impotência ou desmotivação frequente com o ambiente escolar.</li>
+                        <li>Dificuldade de concentração, lapsos de memória ou irritabilidade constante.</li>
+                        <li>Dores físicas sem causa aparente (enxaquecas, tensão nos ombros e problemas digestivos).</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Checklist -->
+                <div class="docente-card">
+                    <h3>Checklist de Saúde Mental no Trabalho!</h3>
+                    <p>Marque os hábitos que você conseguiu praticar esta semana:</p>
+                    
+                    <div class="check-item">
+                        <input type="checkbox" id="check1">
+                        <label for="check1">Defini um horário limite para desligar das mensagens de trabalho.</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check2">
+                        <label for="check2">Fiz pelo menos uma pausa de 10 minutos sem telas durante a jornada.</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check3">
+                        <label for="check3">Reservei um tempo exclusivo para lazer ou família no final de semana.</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check4">
+                        <label for="check4">Pratiquei a escuta empática com colegas sem me sobrecarregar com problemas alheios.</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" id="check5">
+                        <label for="check5">Consegui fazer minhas refeições com calma e sem corrigir trabalhos ao mesmo tempo.</label>
+                    </div>
+                </div>
+
+                <!-- Card 3: Rotina de Desaceleração -->
+                <div class="docente-card">
+                    <h3>Técnicas de Desaceleração Diária ⏳</h3>
+                    <p>Pequenos rituais entre o encerramento das aulas e o início do seu tempo pessoal ajudam o cérebro a desacelerar:</p>
+                    
+                    <div class="rotina-grid">
+                        <div class="rotina-card">
+                            <h4>Ritual de Saída</h4>
+                            <p>Ao fechar a sala de aula ou o computador, faça três respirações profundas e mentalize que o expediente terminou.</p>
+                        </div>
+                        <div class="rotina-card">
+                            <h4>Descarga Mental</h4>
+                            <p>Anote em um bloco as pendências do dia seguinte para não ficar pensando nelas durante a noite.</p>
+                        </div>
+                        <div class="rotina-card">
+                            <h4> Transição Suave</h4>
+                            <p>Use o caminho para casa escutando uma música relaxante ou um podcast não relacionado ao trabalho.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Estratégias -->
+                <div class="docente-card">
+                    <h3>Estratégias de Proteção Emocional..</h3>
+                    <div class="dica-box">
+                        <strong>Estabeleça Limites Claros:</strong> Separe momentos específicos para responder alunos ou responsáveis fora do horário de aula.
+                    </div>
+                    <div class="dica-box">
+                        <strong>Apoio entre Pares:</strong> Crie um canal de diálogo com outros professores para compartilhar desafios e dividir estratégias.
+                    </div>
+                    <div class="dica-box">
+                        <strong>Aprenda a Dizer "Não":</strong> Reconheça o seu limite de carga horária e recuse tarefas extras quando sua saúde mental estiver fragilizada.
+                    </div>
+                    <div class="dica-box">
+                        <strong>Peça Ajuda Quando Precisar:</strong> Reconhecer a sobrecarga é um ato de responsabilidade com sua saúde. Busque auxílio profissional se necessário.
+                    </div>
+                </div>
+
+                <!-- Card 5: Contatos de Apoio -->
+                <div class="docente-card">
+                    <h3>Suporte e Canais de Acolhimento</h3>
+                    <div class="contato-urgente">
+                        <strong>Precisa de apoio psicológico imediato?</strong><br>
+                        O Centro de Valorização da Vida (CVV) oferece atendimento gratuito e confidencial 24 horas por dia pelo telefone <strong>188</strong> ou pelo site oficial. Não hesite em buscar ajuda.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

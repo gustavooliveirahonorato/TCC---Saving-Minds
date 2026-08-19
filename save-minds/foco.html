@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving Minds | Foco Consciente</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="foco.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-menu">
+            <img class="imgLampadaMenu" src="img/logo.png" alt="Logo Saving Minds">
+            <h2>SAVING<br>MINDS</h2>
+        </div>
+        <nav class="menu">
+            <a href="index.html">Início</a>
+            <a href="diario.html">Diário</a>
+            <a href="quiz.html">Quiz de Humor</a>
+            <a href="respiracao.html">Exercícios de Respiração</a>
+            <a href="chat/chat.html">Chat</a>
+            <a href="prioridades.html">Organizar Mente</a>
+            <a href="foco.html" class="active">Foco Consciente</a>
+            <a href="autocuidado.html">Autocuidado Docente</a>
+            <a href="ajuda.html">Ajuda Imediata</a>
+        </nav>
+    </aside>
+
+    <div class="site-wrapper">
+        <main>
+            <section class="inicio">
+                <div class="inicio-texto">
+                    <h1>Foco Consciente</h1>
+                    <p>Use o cronômetro para manter a concentração em blocos de tempo e evite o esgotamento mental.</p>
+                </div>
+            </section>
+
+            <div class="foco-container">
+                <div class="timer-circulo">
+                    <h1 id="displayTempo">25:00</h1>
+                    <span>Tempo de Foco</span>
+                </div>
+
+                <div class="timer-botoes">
+                    <button class="btn-acao-timer btn-iniciar" id="btnIniciar" onclick="alternarCronometro()">Iniciar Foco</button>
+                    <button class="btn-acao-timer btn-reiniciar" onclick="reiniciarCronometro()">Reiniciar</button>
+                </div>
+
+                <div class="secao-tarefas-bloco">
+                    <h4>📌 Tarefas Prioritárias deste Bloco</h4>
+                    <div class="form-bloco">
+                        <input type="text" id="inputMeta" placeholder="Adicione no máximo 3 metas curtas..." autocomplete="off">
+                        <button class="btn-add-mini" onclick="adicionarMeta()">+ Add</button>
+                    </div>
+                    <div id="listaMetasBloco" class="lista-bloco-container"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Linkando o seu arquivo JavaScript -->
+    <script src="foco.js"></script>
+    <script>
+    let tempoRestante = 25 * 60; // 25 minutos
+    let timerId = null;
+    let rodando = false;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Busca os botões da sua tela atual pelo texto deles
+        const botoes = document.querySelectorAll('button');
+        let btnIniciar, btnReiniciar, btnAdd;
+
+        botoes.forEach(btn => {
+            const txt = btn.textContent.trim().toLowerCase();
+            if (txt.includes('iniciar') || txt.includes('pausar') || txt.includes('retomar')) btnIniciar = btn;
+            if (txt.includes('reiniciar')) btnReiniciar = btn;
+            if (txt.includes('add') || txt.includes('+')) btnAdd = btn;
+        });
+
+        // Busca o texto do timer (25:00) na tela
+        const display = Array.from(document.querySelectorAll('*'))
+                            .find(el => el.children.length === 0 && (el.textContent.trim() === '25:00' || /^\d{2}:\d{2}$/.test(el.textContent.trim())));
+
+        // Busca o campo de texto (input) das metas
+        const inputMeta = document.querySelector('input');
+
+        // Cria a lista onde as metas vão aparecer
+        let containerLista = document.getElementById('lista-metas-salvas');
+        if (!containerLista && inputMeta) {
+            containerLista = document.createElement('div');
+            containerLista.id = 'lista-metas-salvas';
+            containerLista.style.marginTop = '12px';
+            inputMeta.parentElement.parentElement.appendChild(containerLista);
+        }
+
+        // Atualiza os minutos/segundos no círculo
+        function atualizarDisplay() {
+            const min = String(Math.floor(tempoRestante / 60)).padStart(2, '0');
+            const seg = String(tempoRestante % 60).padStart(2, '0');
+            if (display) display.textContent = `${min}:${seg}`;
+        }
+
+        // Lógica do Botão Iniciar / Pausar
+        if (btnIniciar) {
+            btnIniciar.addEventListener('click', () => {
+                if (!rodando) {
+                    rodando = true;
+                    btnIniciar.textContent = 'Pausar';
+                    timerId = setInterval(() => {
+                        if (tempoRestante > 0) {
+                            tempoRestante--;
+                            atualizarDisplay();
+                        } else {
+                            clearInterval(timerId);
+                            rodando = false;
+                            alert('Bloco de foco concluído! Tire alguns minutos para descansar.');
+                            tempoRestante = 25 * 60;
+                            atualizarDisplay();
+                            btnIniciar.textContent = 'Iniciar Foco';
+                        }
+                    }, 1000);
+                } else {
+                    clearInterval(timerId);
+                    rodando = false;
+                    btnIniciar.textContent = 'Retomar';
+                }
+            });
+        }
+
+        // Lógica do Botão Reiniciar
+        if (btnReiniciar) {
+            btnReiniciar.addEventListener('click', () => {
+                clearInterval(timerId);
+                rodando = false;
+                tempoRestante = 25 * 60;
+                atualizarDisplay();
+                if (btnIniciar) btnIniciar.textContent = 'Iniciar Foco';
+            });
+        }
+
+        // Lógica para Salvar e Exibir as Metas (usando localStorage)
+        function carregarMetas() {
+            if (!containerLista) return;
+            const metas = JSON.parse(localStorage.getItem('saving_minds_metas') || '[]');
+            containerLista.innerHTML = '';
+            
+            metas.forEach((meta, index) => {
+                const item = document.createElement('div');
+                item.style.cssText = 'display:flex; justify-content:space-between; align-items:center; background:#ffffff; border:1px solid #e0e0e0; padding:8px 12px; margin-top:6px; border-radius:6px; font-size:0.85rem; color:#4A3E65;';
+                item.innerHTML = `
+                    <span>${meta}</span>
+                    <button style="background:none; border:none; color:#cc0000; cursor:pointer; font-weight:bold; font-size:0.9rem;">✕</button>
+                `;
+                item.querySelector('button').onclick = () => {
+                    metas.splice(index, 1);
+                    localStorage.setItem('saving_minds_metas', JSON.stringify(metas));
+                    carregarMetas();
+                };
+                containerLista.appendChild(item);
+            });
+        }
+
+        // Clique do botão + Add
+        if (btnAdd && inputMeta) {
+            btnAdd.addEventListener('click', () => {
+                const texto = inputMeta.value.trim();
+                if (!texto) return;
+                
+                const metas = JSON.parse(localStorage.getItem('saving_minds_metas') || '[]');
+                if (metas.length >= 3) {
+                    alert('Você pode adicionar no máximo 3 metas por bloco!');
+                    return;
+                }
+                
+                metas.push(texto);
+                localStorage.setItem('saving_minds_metas', JSON.stringify(metas));
+                inputMeta.value = '';
+                carregarMetas();
+            });
+        }
+
+        carregarMetas();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+/* ==========================================================================
+   SAVING MINDS - ESTILOS GLOBAIS E INTEGRADOS
+   ========================================================================== */
+
+:root {
+    --primary-color: #8C78B3;
+    --primary-hover: #726095;
+    --bg-main: #FAF8F5;
+    --bg-card: #ffffff;
+    --bg-secondary: #F8F6E8;
+    --text-color: #4A3E65;
+    --text-muted: #666666;
+    --border-color: #E0E0E0;
+    --sidebar-width: 240px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-color);
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   SIDEBAR & LAYOUT GERAL
+   ========================================================================== */
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: #2D2B55;
+    color: #ffffff;
+    padding: 20px 15px;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.logo-menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.imgLampadaMenu {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.logo-menu h2 {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    color: #E1BEE7;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu a {
+    color: #D1C4E9;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.menu a:hover, .menu a.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.site-wrapper {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 40px;
+    max-width: calc(100% - var(--sidebar-width));
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.inicio-texto h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+
+.inicio-texto p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   1. MURAL DE MENSAGENS (diario.html)
+   ========================================================================== */
+
+.mensagens-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: 20px auto 0 auto;
+    border: 1px solid var(--border-color);
+}
+
+.filtros-categorias {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.btn-filtro {
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.btn-filtro:hover, .btn-filtro.ativo {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+}
+
+.mural-mensagens {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.card-mensagem {
+    background-color: var(--bg-secondary);
+    border-left: 5px solid var(--primary-color);
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-mensagem p {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+.card-mensagem span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   2. EXERCÍCIOS DE RESPIRAÇÃO (respiracao.html)
+   ========================================================================== */
+
+.respiracao-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 650px;
+    margin: 20px auto 0 auto;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.circulo-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circulo-guia {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), #4FB3BF);
+    box-shadow: 0 0 20px rgba(140, 120, 179, 0.4);
+    transition: transform 4s ease-in-out;
+}
+
+.circulo-guia.inspirar { transform: scale(1.8); }
+.circulo-guia.expirar { transform: scale(1); }
+
+.instrucao-texto {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 15px 0 5px 0;
+}
+
+.tempo-display {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   3. CHAT INTELIGENTE (chat/chat.html)
+   ========================================================================== */
+
+.chat-container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 700px;
+    margin: 20px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.chat-header {
+    background-color: #2D2B55;
+    color: #ffffff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--bg-main);
+}
+
+.message {
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.message.bot {
+    background-color: #ffffff;
+    color: var(--text-color);
+    align-self: flex-start;
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 2px;
+}
+
+.message.user {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+/* ==========================================================================
+   4. FOCO CONSCIENTE (foco.html)
+   ========================================================================== */
+
+.foco-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 650px;
+    margin: 20px auto 0 auto;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.timer-circulo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 8px solid var(--primary-color);
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.timer-display {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* ==========================================================================
+   5. AUTOCUIDADO DOCENTE (autocuidado.html)
+   ========================================================================== */
+
+.autocuidado-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 850px;
+    margin: 30px auto 0 auto;
+}
+
+.docente-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+.docente-card h3 {
+    color: var(--text-color);
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.docente-card p {
+    color: #555555;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--bg-secondary);
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.check-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.check-item label {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dica-box {
+    background-color: var(--bg-secondary);
+    border-left: 5px solid var(--primary-color);
+    padding: 15px 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; }
+    .site-wrapper { margin-left: 0; max-width: 100%; padding: 20px; }
+}

@@ -1,0 +1,93 @@
+/* ==========================================================================
+   SAVING MINDS - QUIZ DE HUMOR (quiz.html)
+   ========================================================================== */
+
+.quiz-container {
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    max-width: 700px;
+    margin: 20px auto 0 auto;
+    border: 1px solid var(--border-color, #E0E0E0);
+}
+
+.quiz-progresso {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--primary-color, #8C78B3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.quiz-pergunta {
+    font-size: 1.25rem;
+    color: var(--text-color, #4A3E65);
+    margin-bottom: 25px;
+    line-height: 1.4;
+    font-weight: bold;
+}
+
+.quiz-opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quiz-opcao-btn {
+    background-color: var(--bg-secondary, #F8F6E8);
+    border: 2px solid var(--border-color, #E0E0E0);
+    color: var(--text-color, #4A3E65);
+    padding: 14px 18px;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quiz-opcao-btn:hover {
+    background-color: var(--primary-color, #8C78B3);
+    color: #ffffff;
+    border-color: var(--primary-color, #8C78B3);
+    transform: translateX(4px);
+}
+
+.quiz-resultado {
+    display: none;
+    text-align: center;
+}
+
+.quiz-resultado h2 {
+    color: var(--text-color, #4A3E65);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.quiz-resultado p {
+    color: var(--text-muted, #555555);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+.btn-reiniciar {
+    background-color: var(--primary-color, #8C78B3);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-reiniciar:hover {
+    background-color: var(--primary-hover, #726095);
+}

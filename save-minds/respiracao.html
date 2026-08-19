@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving Minds | Exercícios de Respiração</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .respiracao-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            max-width: 650px;
+            margin: 20px auto 0 auto;
+            text-align: center;
+        }
+
+        .seletor-tecnica {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn-tecnica {
+            background-color: #F8F6E8;
+            border: 2px solid #E0E0E0;
+            color: #4A3E65;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .btn-tecnica.ativo,
+        .btn-tecnica:hover {
+            background-color: #8C78B3;
+            color: white;
+            border-color: #8C78B3;
+        }
+
+        /* Animação do Círculo de Respiração */
+        .circulo-wrapper {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circulo-guia {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8C78B3, #4FB3BF);
+            box-shadow: 0 0 20px rgba(140, 120, 179, 0.4);
+            transition: transform 4s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circulo-guia.inspirar {
+            transform: scale(1.8);
+        }
+
+        .circulo-guia.expirar {
+            transform: scale(1);
+        }
+
+        .instrucao-texto {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4A3E65;
+            margin: 15px 0 5px 0;
+            min-height: 40px;
+        }
+
+        .tempo-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8C78B3;
+            margin-bottom: 20px;
+        }
+
+        .btn-respirar {
+            background-color: #8C78B3;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.2s ease;
+        }
+
+        .btn-respirar:hover {
+            background-color: #726095;
+        }
+
+        .descricao-tecnica {
+            background-color: #F8F6E8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 25px;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #4A3E65;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo-menu">
+            <img class="imgLampadaMenu" src="img/logo.png" alt="Logo Saving Minds">
+            <h2>SAVING<br>MINDS</h2>
+        </div>
+
+        <nav class="menu">
+            <a href="index.html">Início</a>
+            <a href="diario.html">Mensagens</a>
+            <a href="quiz.html">Quiz de Humor</a>
+            <a href="respiracao.html" class="active">Exercícios de Respiração</a>
+            <a href="chat/chat.html"> Chat</a>
+            <a href="foco.html">Foco Consciente</a>
+            <a href="autocuidado.html"> Autocuidado Docente</a>
+            <a href="ajuda.html">Ajuda Imediata</a>
+        </nav>
+    </aside>
+
+    <div class="site-wrapper">
+        <main>
+            <section class="inicio">
+                <div class="inicio-texto">
+                    <h1>Exercícios de Respiração Guiada!</h1>
+                    <p>Sintonize sua respiração para desacelerar o ritmo cardíaco, reduzir o estresse e recuperar o foco no momento presente.</p>
+                </div>
+            </section>
+
+            <div class="respiracao-container">
+                <div class="seletor-tecnica">
+                    <button class="btn-tecnica ativo" onclick="selecionarTecnica('quadrada', this)">Respiração Quadrada (4-4-4-4)</button>
+                    <button class="btn-tecnica" onclick="selecionarTecnica('relaxante', this)">Técnica 4-7-8 (Calma Profunda)</button>
+                </div>
+
+                <div class="instrucao-texto" id="instrucaoTexto">Clique abaixo para começar</div>
+                <div class="tempo-display" id="tempoDisplay">--</div>
+
+                <div class="circulo-wrapper">
+                    <div class="circulo-guia" id="circuloGuia"></div>
+                </div>
+
+                <button class="btn-respirar" id="btnIniciar" onclick="alternarExercicio()">Iniciar Respiração</button>
+
+                <div class="descricao-tecnica" id="descricaoTecnica">
+                    <strong>Respiração Quadrada:</strong> Indicada para ansiedade e momentos de sobrecarga. Divide o ciclo em 4 etapas iguais: inspire, segure, expire e segure o ar.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let emExecucao = false;
+        let cicloTimeout = null;
+        let contadorInterval = null;
+        let tecnicaAtual = 'quadrada';
+
+        const tecnicas = {
+            quadrada: {
+                nome: "Respiração Quadrada",
+                desc: "<strong>Respiração Quadrada:</strong> Indicada para ansiedade e momentos de sobrecarga. Divide o ciclo em 4 etapas iguais: inspire, segure, expire e segure o ar por 4 segundos cada.",
+                etapas: [
+                    { acao: "Inspire...", tempo: 4, modo: "inspirar" },
+                    { acao: "Segure o ar...", tempo: 4, modo: "manter" },
+                    { acao: "Expire devagar...", tempo: 4, modo: "expirar" },
+                    { acao: "Pausa (sem ar)...", tempo: 4, modo: "manter" }
+                ]
+            },
+            relaxante: {
+                nome: "Técnica 4-7-8",
+                desc: "<strong>Técnica 4-7-8:</strong> Uma das mais eficazes para relaxamento profundo antes de provas ou para dormir. Inspire em 4s, segure em 7s e expire suavemente em 8s.",
+                etapas: [
+                    { acao: "Inspire pelo nariz...", tempo: 4, modo: "inspirar" },
+                    { acao: "Segure o ar...", tempo: 7, modo: "manter" },
+                    { acao: "Expire pela boca...", tempo: 8, modo: "expirar" }
+                ]
+            }
+        };
+
+        function selecionarTecnica(tipo, elemento) {
+            if (emExecucao) pararExercicio();
+            tecnicaAtual = tipo;
+            document.querySelectorAll('.btn-tecnica').forEach(b => b.classList.remove('ativo'));
+            elemento.classList.add('ativo');
+            document.getElementById('descricaoTecnica').innerHTML = tecnicas[tipo].desc;
+        }
+
+        function alternarExercicio() {
+            if (emExecucao) {
+                pararExercicio();
+            } else {
+                iniciarExercicio();
+            }
+        }
+
+        function iniciarExercicio() {
+            emExecucao = true;
+            document.getElementById('btnIniciar').innerText = "Parar Exercício";
+            executarEtapa(0);
+        }
+
+        function executarEtapa(indice) {
+            if (!emExecucao) return;
+
+            const listaEtapas = tecnicas[tecnicaAtual].etapas;
+            const etapa = listaEtapas[indice % listaEtapas.length];
+            const circulo = document.getElementById('circuloGuia');
+            const instrucao = document.getElementById('instrucaoTexto');
+            const display = document.getElementById('tempoDisplay');
+
+            instrucao.innerText = etapa.acao;
+            circulo.style.transitionDuration = `${etapa.tempo}s`;
+
+            if (etapa.modo === "inspirar") {
+                circulo.classList.add('inspirar');
+                circulo.classList.remove('expirar');
+            } else if (etapa.modo === "expirar") {
+                circulo.classList.add('expirar');
+                circulo.classList.remove('inspirar');
+            }
+
+            let segundosRestantes = etapa.tempo;
+            display.innerText = segundosRestantes;
+
+            clearInterval(contadorInterval);
+            contadorInterval = setInterval(() => {
+                segundosRestantes--;
+                if (segundosRestantes >= 0) {
+                    display.innerText = segundosRestantes;
+                }
+            }, 1000);
+
+            cicloTimeout = setTimeout(() => {
+                executarEtapa(indice + 1);
+            }, etapa.tempo * 1000);
+        }
+
+        function pararExercicio() {
+            emExecucao = false;
+            clearTimeout(cicloTimeout);
+            clearInterval(contadorInterval);
+
+            const circulo = document.getElementById('circuloGuia');
+            circulo.classList.remove('inspirar', 'expirar');
+
+            document.getElementById('instrucaoTexto').innerText = "Exercício pausado";
+            document.getElementById('tempoDisplay').innerText = "--";
+            document.getElementById('btnIniciar').innerText = "Iniciar Respiração";
+        }
+    </script>
+</body>
+
+</html>

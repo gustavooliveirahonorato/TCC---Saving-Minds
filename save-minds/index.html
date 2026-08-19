@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving Minds | Início</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo-menu">
+            <img class="imgLampadaMenu" src="img/logo.png" alt="Logo Saving Minds">
+            <h2>SAVING<br>MINDS</h2>
+        </div>
+
+        <nav class="menu">
+            <a href="index.html" class="active">Início</a>
+            <a href="diario.html">Diário</a>
+            <a href="quiz.html">Quiz de Humor</a>
+            <a href="respiracao.html">Exercícios de Respiração</a>
+            <a href="chat.html">Chat</a>
+            <a href="foco.html">Foco Consciente</a>
+            <a href="autocuidado.html">Autocuidado Docente</a>
+            <a href="ajuda.html">Ajuda Imediata</a>
+        </nav>
+    </aside>
+
+    <div class="site-wrapper">
+        <header>
+            <img class="imgLampada" src="img/logo.png" alt="Logo Saving Minds">
+            <div class="logo">SAVING MINDS</div>
+            <nav>
+                <a href="ajuda.html" class="emergencyButton">Ajuda Imediata</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="inicio">
+                <div class="inicio-texto">
+                    <h1>Bem-vindo ao Saving Minds</h1>
+                    <p>
+                        O <strong>Saving Minds</strong> é um projeto desenvolvido como Trabalho de Conclusão de Curso (TCC),
+                        criado para conscientizar sobre a importância da saúde mental no ambiente escolar.
+                    </p>
+                    <p>
+                        Nosso objetivo é oferecer um ambiente acolhedor para estudantes, professores e toda a comunidade
+                        escolar, promovendo o cuidado com a saúde mental por meio do registro de emoções, mensagens de apoio,
+                        exercícios de respiração e momentos de reflexão.
+                    </p>
+                    <p>
+                        Acreditamos que ouvir, acolher e cuidar são atitudes fundamentais para construir um ambiente escolar
+                        mais saudável, empático e seguro para todos.
+                    </p>
+                    <a href="#humor" class="btn-inicio">Começar Agora</a>
+                </div>
+            </section>
+
+            <div class="sobre-container">
+                <div class="sobre-topico" id="problema">
+                    <h3>O Problema: A Pressão na Rotina Escolar </h3>
+                    <p>
+                        O ambiente escolar é um espaço de grande crescimento, mas também de intensa cobrança. No dia a dia dos corredores e das salas de aula, percebemos o quanto a pressão por notas, o estresse e a ansiedade afetam silenciosamente a saúde mental de estudantes e professores. Muitas vezes, esses sentimentos são ignorados ou guardados por falta de um espaço seguro para desabafar.
+                    </p>
+                </div>
+
+                <div class="sobre-topico" id="solucao">
+                    <h3>A Solução: O Saving Minds </h3>
+                    <p>
+                        Foi a partir dessa necessidade real que nasceu o <strong>Saving Minds</strong>. O nosso projeto une a tecnologia à empatia para criar um ambiente digital acolhedor e acessível. Através de ferramentas práticas, como o registo de emoções, exercícios de respiração e mensagens de apoio, queremos mostrar à comunidade escolar que cuidar da mente é tão importante quanto qualquer outra disciplina, e que pedir ajuda é um sinal de coragem.
+                    </p>
+                </div>
+
+                <div class="sobre-topico" id="equipe">
+                    <h3>Quem Somos Nós </h3>
+                    <p>
+                        Somos um grupo de estudantes unidos pela vontade de fazer a diferença através da tecnologia. Desenvolvemos cada detalhe deste sistema com dedicação e carinho, pensando no bem-estar de cada colega e professor que venha a utilizar a plataforma.
+                    </p>
+                    <p>
+                        <strong>Desenvolvido por:</strong> Ana Clara, Evilyn Rossin, Gustavo Honorato, Ryan Rodrigues e Yasmin Dias.
+                    </p>
+                </div>
+            </div>
+
+            <section class="hero" id="humor">
+                <h1>Olá! Como está seu humor hoje?</h1>
+                <div class="mood-card">
+                    <p>Selecione um emoji para ver sua frase do dia:</p>
+                    <div class="mood-options">
+                        <button class="mood-btn" onclick="abrirPopUp('Radiante')">🤩</button>
+                        <button class="mood-btn" onclick="abrirPopUp('Bem')">🙂</button>
+                        <button class="mood-btn" onclick="abrirPopUp('Neutro')">😐</button>
+                        <button class="mood-btn" onclick="abrirPopUp('Exausto')">😫</button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="features-grid">
+                <a href="diario.html" class="card-link">
+                    <div class="card">
+                        <div class="icon">📝</div>
+                        <h3>Mensagens</h3>
+                        <p>Leia mensagens de apoio e depoimentos inspiradores.</p>
+                    </div>
+                </a>
+
+                <a href="quiz.html" class="card-link">
+                    <div class="card">
+                        <div class="icon">🎯</div>
+                        <h3>Quiz de Relato</h3>
+                        <p>Conte como está se sentindo de forma segura.</p>
+                    </div>
+                </a>
+
+                <a href="respiracao.html" class="card-link">
+                    <div class="card">
+                        <div class="icon">🧘</div>
+                        <h3>Respire</h3>
+                        <p>Pratique exercícios de respiração para aliviar o estresse e a ansiedade.</p>
+                    </div>
+                </a>
+
+                <a href="chat/chat.html" class="card-link">
+                    <div class="card">
+                        <div class="icon">🤖</div>
+                        <h3>Chat Inteligente</h3>
+                        <p>Converse com o assistente virtual do Saving Minds para receber apoio e orientações.</p>
+                    </div>
+                </a>
+
+                <a href="foco.html" class="card-link">
+                    <div class="card">
+                        <div class="icon">⏱️</div>
+                        <h3>Foco Consciente</h3>
+                        <p>Gerencie seu tempo de estudos e pausas de forma saudável para evitar a sobrecarga mental.</p>
+                    </div>
+                </a>
+
+                <a href="autocuidado.html" class="card-link">
+                    <div class="card">
+                        <div class="icon">☕</div>
+                        <h3>Autocuidado Docente</h3>
+                        <p>Ferramentas de apoio, avaliação de estresse e suporte voltados para a gestão e professores.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div id="modalFrase" class="modal">
+                <div class="modal-content">
+                    <p id="textoFrase">Carregando frase...</p>
+                    <button class="btn-save" onclick="fecharPopUp()">Fechar</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-conteudo">
+                <h3 class="logo" style="padding-left: 0;">Saving Minds</h3>
+                <p>Projeto de TCC desenvolvido para promover o cuidado com a saúde mental no ambiente escolar.</p>
+                
+                <div class="footer-emergencia">
+                    <p>Precisa conversar agora? Ligue <strong>188 (CVV)</strong> - Atendimento 24h e gratuito.</p>
+                    <a href="ajuda.html" class="emergencyButton" style="background-color: var(--accent-red); color: white; text-decoration: none; display: inline-block;">Pedir Ajuda Urgente</a>
+                </div>
+                
+                <p class="footer-direitos">&copy; 2026 Saving Minds. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+    function abrirPopUp(humor) {
+        console.log("Emoji clicado:", humor);
+
+        const modal = document.getElementById('modalFrase');
+        if (!modal) return;
+
+        // Mapeamento dos emojis visualmente
+        const emojis = {
+            'Radiante': '🤩',
+            'Bem': '🙂',
+            'Neutro': '😐',
+            'Exausto': '😫'
+        };
+
+        const emojiAtual = emojis[humor] || '✨';
+
+        // Prepara o conteúdo do modal animado com o emoji no topo
+        const modalContent = modal.querySelector('.modal-content');
+        modalContent.innerHTML = `
+            <span class="modal-emoji">${emojiAtual}</span>
+            <p id="textoFrase">Buscando mensagem motivacional...</p>
+            <button class="btn-save" onclick="fecharPopUp()">Fechar</button>
+        `;
+
+        modal.style.display = "flex";
+
+        // Faz o fetch para o arquivo PHP buscar no banco de dados MySQL
+        fetch('obter_frase.php?humor=' + encodeURIComponent(humor))
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na resposta do servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const textoFrase = document.getElementById('textoFrase');
+                if (data.sucesso && textoFrase) {
+                    textoFrase.innerText = data.frase;
+                } else if (textoFrase) {
+                    textoFrase.innerText = data.mensagem || "Tenha um ótimo dia e cuide da sua mente!";
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição:', error);
+                const textoFrase = document.getElementById('textoFrase');
+                if (textoFrase) {
+                    textoFrase.innerText = "Tenha um excelente dia e lembre-se de cuidar de você!";
+                }
+            });
+    }
+
+    function fecharPopUp() {
+        const modal = document.getElementById('modalFrase');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+    </script>
+</body>
+</html>
