@@ -1,15 +1,12 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-$host = 'localhost';
-$usuario = 'root';
-$senha = '';
-$banco = 'saving_minds';
+// Inclui a conexão segura configurada para o TiDB Cloud
+require_once 'conexao.php';
 
-$conexao = new mysqli($host, $usuario, $senha, $banco);
-
-if ($conexao->connect_error) {
-    echo json_encode(['sucesso' => false, 'erro' => 'Erro de conexão com o banco']);
+// Garante que a variável $conn veio do conexao.php
+if (!isset($conn) || $conn->connect_error) {
+    echo json_encode(['sucesso' => false, 'erro' => 'Erro de conexão com o banco de dados']);
     exit;
 }
 
@@ -24,7 +21,7 @@ if (empty(trim($conteudo))) {
 }
 
 $sql = "INSERT INTO diario_mensagens (usuario_id, titulo, conteudo, e_publico) VALUES (?, ?, ?, ?)";
-$stmt = $conexao->prepare($sql);
+$stmt = $conn->prepare($sql);
 
 if ($stmt) {
     $stmt->bind_param("issi", $usuario_id, $titulo, $conteudo, $e_publico);
@@ -38,5 +35,5 @@ if ($stmt) {
     echo json_encode(['sucesso' => false, 'erro' => 'Erro na query']);
 }
 
-$conexao->close();
+$conn->close();
 ?>
