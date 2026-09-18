@@ -45,8 +45,8 @@ function salvarDiario(event) {
         return;
     }
 
-    // Chamada correta apontando para o arquivo salvar.php na mesma pasta
-    fetch('salvar.php', {
+    // Caminho absoluto corrigido para '/salvar.php'
+    fetch('/salvar.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
