@@ -1,18 +1,15 @@
 <?php
-$host = "gateway01.us-east-1.prod.aws.tidbcloud.com";
-$usuario = "Wen9maK69CYDqnX.root";
-$senha = "FCzmAOxZakHLB0aa"; 
-$banco = "sys";
-$porta = 4000;
+// Lê as variáveis do Render ou usa os valores padrão do TiDB caso rode local
+$host = getenv('DB_HOST') ?: "gateway01.us-east-1.prod.aws.tidbcloud.com";
+$usuario = getenv('DB_USER') ?: "Wen9maK69CYDqnX.root";
+$senha = getenv('DB_PASS') ?: "FCzmAOxZakHLB0aa"; 
+$banco = getenv('DB_NAME') ?: "sys";
+$porta = getenv('DB_PORT') ?: 4000;
 
-// Cria a conexão incluindo a porta
 $conn = mysqli_init();
-
-// Configuração SSL exigida pelo TiDB Cloud
-// (Se faltar isso, a conexão de fora da rede deles pode ser rejeitada)
 mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
 
-if (!mysqli_real_connect($conn, $host, $usuario, $senha, $banco, $porta, NULL, MYSQLI_CLIENT_SSL)) {
+if (!mysqli_real_connect($conn, $host, $usuario, $senha, $banco, (int)$porta, NULL, MYSQLI_CLIENT_SSL)) {
     die("Erro na conexão com o banco de dados: " . mysqli_connect_error());
 }
 

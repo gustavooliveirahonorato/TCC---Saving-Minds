@@ -1,14 +1,11 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-$host = 'localhost';
-$usuario = 'root';
-$senha = '';
-$banco = 'saving_minds';
+// Usa a conexão SSL padronizada com o TiDB
+require_once 'conexao.php';
+$conexao = $conn;
 
-$conexao = new mysqli($host, $usuario, $senha, $banco);
-
-if ($conexao->connect_error) {
+if (!$conexao || $conexao->connect_error) {
     echo json_encode(['sucesso' => false, 'erro' => 'Erro de conexao']);
     exit;
 }

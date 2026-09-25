@@ -1,14 +1,11 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-$servidor = "localhost";
-$usuario = "root";
-$senha = "";
-$banco = "saving_minds";
+// Usa a conexão SSL padronizada com o TiDB
+require_once 'conexao.php';
+$conexao = $conn;
 
-$conexao = new mysqli($servidor, $usuario, $senha, $banco);
-
-if ($conexao->connect_error) {
+if (!$conexao || $conexao->connect_error) {
     echo json_encode(["sucesso" => false, "mensagem" => "Erro na conexão com o banco."]);
     exit;
 }
@@ -18,9 +15,11 @@ $humor = $_GET['humor'] ?? '';
 if (!empty($humor)) {
     $sql_insert = "INSERT INTO registros_humor (humor) VALUES (?)";
     $stmt_insert = $conexao->prepare($sql_insert);
-    $stmt_insert->bind_param("s", $humor);
-    $stmt_insert->execute();
-    $stmt_insert->close();
+    if ($stmt_insert) {
+        $stmt_insert->bind_param("s", $humor);
+        $stmt_insert->execute();
+        $stmt_insert->close();
+    }
 }
 
 $frases = [
