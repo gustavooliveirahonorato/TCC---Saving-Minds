@@ -1,0 +1,173 @@
+/* =====================================================
+   RESPONSIVO - SAVING MINDS
+   Arquivo separado, não mexe em nada do style.css.
+   Ele só é aplicado quando a tela é pequena (celular/tablet).
+   ===================================================== */
+
+   * {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Botão hambúrguer (só aparece no celular, é criado pelo responsive-menu.js) */
+.menu-hamburguer {
+    display: none;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1100;
+    width: 46px;
+    height: 46px;
+    background: var(--primary, #74158e);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,.3);
+}
+
+/* Fundo escuro atrás do menu quando ele está aberto no celular */
+.overlay-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 999;
+}
+
+.overlay-menu.ativo {
+    display: block;
+}
+
+@media (max-width: 900px) {
+
+    .menu-hamburguer {
+        display: block;
+    }
+
+    /* Sidebar vira um menu que desliza da esquerda, escondido por padrão */
+    .sidebar {
+        width: 250px;
+        transform: translateX(-100%);
+        transition: transform .3s ease;
+    }
+
+    .sidebar.aberta {
+        transform: translateX(0);
+    }
+
+    /* Sem o menu fixo ocupando espaço, o conteúdo usa a tela toda */
+    header,
+    main,
+    footer {
+        margin-left: 0 !important;
+    }
+
+    header {
+        padding: 16px 20px 16px 70px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .logo {
+        padding-left: 0;
+        font-size: 1.2rem;
+    }
+
+    /* Seção inicial (Home) */
+    .inicio {
+        padding: 90px 16px 40px;
+    }
+
+    .inicio-texto h1 {
+        font-size: 2rem;
+    }
+
+    .inicio-texto p {
+        font-size: 1rem;
+    }
+
+    .imagemInicio {
+        width: 100%;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .slider {
+        width: 100%;
+        height: 260px;
+    }
+
+    .sobre-container {
+        padding: 0 16px;
+        margin: 40px auto;
+    }
+
+    .sobre-topico {
+        padding: 22px;
+    }
+
+    .sobre-topico h3 {
+        font-size: 1.3rem;
+    }
+
+    .mood-card {
+        margin: 16px;
+        padding: 20px;
+    }
+
+    .mood-btn {
+        font-size: 2.2rem;
+    }
+
+    .modal-content {
+        width: 88%;
+        margin: 0 auto;
+    }
+
+    .footer-conteudo {
+        padding: 0 10px;
+    }
+
+    /* Contêineres genéricos de conteúdo das páginas internas
+       (Diário, Quiz, Respiração, Foco, Prioridades, Autocuidado, Chat) */
+    main {
+        padding: 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .inicio-texto h1 {
+        font-size: 1.6rem;
+    }
+
+    .inicio-texto p {
+        font-size: .95rem;
+    }
+
+    .btn-inicio {
+        padding: 12px 26px;
+        font-size: 15px;
+    }
+
+    .mood-options {
+        gap: 10px;
+    }
+
+    .mood-btn {
+        font-size: 1.8rem;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
