@@ -1,17 +1,21 @@
 <?php
-// Lê as variáveis do Render ou usa os valores padrão do TiDB caso rode local
-$host = getenv('DB_HOST') ?: "gateway01.us-east-1.prod.aws.tidbcloud.com";
-$usuario = getenv('DB_USER') ?: "Wen9maK69CYDqnX.root";
-$senha = getenv('DB_PASS') ?: "FCzmAOxZakHLB0aa"; 
-$banco = getenv('DB_NAME') ?: "sys";
-$porta = getenv('DB_PORT') ?: 4000;
+ini_set('display_errors', 0);
+error_reporting(0);
 
+$host = getenv('DB_HOST');
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASS');
+$db   = getenv('DB_NAME');
+$port = getenv('DB_PORT') ?: 4000;
+
+// Inicializa a conexão MySQLi com suporte a SSL (Exigido pelo TiDB Cloud)
 $conn = mysqli_init();
-mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
+$conn->ssl_set(NULL, NULL, NULL, NULL, NULL);
+$conn->real_connect($host, $user, $pass, $db, (int)$port, NULL, MYSQLI_CLIENT_SSL);
 
-if (!mysqli_real_connect($conn, $host, $usuario, $senha, $banco, (int)$porta, NULL, MYSQLI_CLIENT_SSL)) {
-    die("Erro na conexão com o banco de dados: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['sucesso' => false, 'erro' => 'Erro de conexão: ' . $conn->connect_error]);
+    exit;
 }
-
-$conn->set_charset("utf8mb4");
 ?>
