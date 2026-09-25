@@ -21,19 +21,26 @@ function enviarMensagem(event) {
     containerMensagens.scrollTop = containerMensagens.scrollHeight;
 
     // 2. Envia a mensagem para o banco de dados via PHP
-    fetch('/save-minds/salvar_mensagem.php', {
+    const dadosFormulario = new URLSearchParams();
+    dadosFormulario.append('remetente', 'USUARIO');
+    dadosFormulario.append('mensagem', textoMensagem);
+
+    fetch('../salvar_chat.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: JSON.stringify({ mensagem: textoMensagem })
+        body: dadosFormulario.toString()
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(resultado => {
         console.log('Retorno do PHP:', resultado);
+        if (!resultado.sucesso) {
+            console.error('Falha ao salvar a mensagem no banco:', resultado.erro);
+        }
     })
     .catch(error => {
-        console.error('Erro:', error);
+        console.error('Erro ao salvar a mensagem no banco:', error);
     });
 
     // 3. Simula a resposta automática do assistente
