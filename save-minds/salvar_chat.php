@@ -1,11 +1,10 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-// Usa a conexão SSL padronizada com o TiDB
 require_once 'conexao.php';
 $conexao = $conn;
 
-if (!$conexao || $conexao->connect_error) {
+if (!isset($conexao) || $conexao->connect_error) {
     echo json_encode(['sucesso' => false, 'erro' => 'Erro de conexao']);
     exit;
 }
